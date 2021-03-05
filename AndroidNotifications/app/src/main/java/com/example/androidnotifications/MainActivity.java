@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String CHANNEL_NAME = "Notifications Channel";
     private static final String CHANNEL_DESC = "Notifications in android";
 
-    private TextView textView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,17 +36,15 @@ public class MainActivity extends AppCompatActivity {
             manager.createNotificationChannel(channel);
         }
 
-        textView = findViewById(R.id.textViewToken);
-
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
                         if (task.isSuccessful()) {
                             String token = task.getResult().getToken();
-                            textView.setText("Token : " + token);
+
                         } else {
-                            textView.setText("Token not generated");
+
                         }
                     }
                 });
