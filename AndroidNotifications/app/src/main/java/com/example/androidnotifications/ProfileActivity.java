@@ -3,6 +3,7 @@ package com.example.androidnotifications;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -42,9 +43,15 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        if (mAuth.getCurrentUser() == null) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
     }
 
-    private void saveToken(String token){
+    private void saveToken(String token) {
         String email = mAuth.getCurrentUser().getEmail();
         User user = new User(email, token);
 
@@ -53,7 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
                 .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Toast.makeText(ProfileActivity.this, "Token Saved", Toast.LENGTH_LONG).show();
                 }
             }
