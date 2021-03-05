@@ -1,4 +1,4 @@
-package com.example.androidnotifications;
+package com.tfm.androidnotifications;
 
 import org.junit.Test;
 
