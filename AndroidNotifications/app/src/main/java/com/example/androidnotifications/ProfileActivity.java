@@ -16,8 +16,9 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
 public class ProfileActivity extends AppCompatActivity {
-
+    public static final String NODE_USERS = "users";
     private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +42,11 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart(){
         super.onStart();
 
-        if (mAuth.getCurrentUser() == null) {
+        if(mAuth.getCurrentUser() == null) {
+
             Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -55,16 +57,17 @@ public class ProfileActivity extends AppCompatActivity {
         String email = mAuth.getCurrentUser().getEmail();
         User user = new User(email, token);
 
-        DatabaseReference dbUsers = FirebaseDatabase.getInstance().getReference("users");
+        DatabaseReference dbUsers = FirebaseDatabase.getInstance().getReference(NODE_USERS);
+
         dbUsers.child(mAuth.getCurrentUser().getUid())
                 .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
+                if(task.isSuccessful()){
                     Toast.makeText(ProfileActivity.this, "Token Saved", Toast.LENGTH_LONG).show();
                 }
             }
         });
+
     }
 }
-

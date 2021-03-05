@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.buttonSignUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    createUser();
+                createUser();
             }
         });
     }
@@ -112,6 +112,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mAuth.getCurrentUser() != null) {
+            startProfileActivity();
+        }
     }
 
     private void startProfileActivity() {
