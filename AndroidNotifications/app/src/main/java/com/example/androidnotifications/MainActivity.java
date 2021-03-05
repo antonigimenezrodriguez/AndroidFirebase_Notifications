@@ -59,20 +59,6 @@ public class MainActivity extends AppCompatActivity {
                     createUser();
             }
         });
-
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (task.isSuccessful()) {
-                            String token = task.getResult().getToken();
-
-                        } else {
-
-                        }
-                    }
-                });
-
     }
 
     private void createUser() {
