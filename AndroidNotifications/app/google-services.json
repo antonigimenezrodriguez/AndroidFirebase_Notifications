@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "690523346504",
+    "project_id": "androidnotificationsantoni",
+    "storage_bucket": "androidnotificationsantoni.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690523346504:android:e1b8aaf3bf160a28d0aa7d",
+        "android_client_info": {
+          "package_name": "com.example.androidnotifications"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690523346504-lsi6n686v69jsssdnpv5pm9ckd3fs0rm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZZPiSq87U5Qcq8Rq9Afa-HQtqgSfxmlw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690523346504-lsi6n686v69jsssdnpv5pm9ckd3fs0rm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
