@@ -1,4 +1,4 @@
-package com.example.androidnotifications;
+package com.tfm.androidnotifications;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,7 +26,8 @@ import com.google.firebase.iid.InstanceIdResult;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String CHANNEL_ID = "notifications";
+
+    public static final String CHANNEL_ID = "notifications";
     private static final String CHANNEL_NAME = "Notifications Channel";
     private static final String CHANNEL_DESC = "Notifications in android";
 
@@ -40,8 +40,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mAuth = FirebaseAuth.getInstance();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription(CHANNEL_DESC);
             NotificationManager manager = getSystemService(NotificationManager.class);
@@ -52,34 +55,38 @@ public class MainActivity extends AppCompatActivity {
         progressBar.setVisibility(View.INVISIBLE);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
-
         findViewById(R.id.buttonSignUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createUser();
+                CreateUser();
             }
         });
+
+
     }
 
-    private void createUser() {
+    private void CreateUser() {
         String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        String password = editTextEmail.getText().toString().trim();
 
         if (email.isEmpty()) {
             editTextEmail.setError("Email required");
             editTextEmail.requestFocus();
             return;
         }
+
         if (password.isEmpty()) {
             editTextPassword.setError("Password required");
             editTextPassword.requestFocus();
             return;
         }
+
         if (password.length() < 6) {
-            editTextPassword.setError("Password should be at least 6 characters");
+            editTextPassword.setError("Password should be at least 6 char long");
             editTextPassword.requestFocus();
             return;
         }
+
         progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -115,9 +122,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart(){
         super.onStart();
-        if (mAuth.getCurrentUser() != null) {
+
+        if(mAuth.getCurrentUser() != null) {
             startProfileActivity();
         }
     }
@@ -128,14 +136,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void displayNotification() {
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_notification)
-                .setContentTitle("The notification is working!!")
-                .setContentText("This is a text of a notification")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-        NotificationManagerCompat mNotificationMgr = NotificationManagerCompat.from(this);
-        mNotificationMgr.notify(1, mBuilder.build());
-    }
 }

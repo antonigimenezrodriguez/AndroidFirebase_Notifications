@@ -1,4 +1,4 @@
-package com.example.androidnotifications;
+package com.tfm.androidnotifications;
 
 public class User {
     public String email;
@@ -9,4 +9,3 @@ public class User {
         this.token = token;
     }
 }
-

@@ -1,4 +1,4 @@
-package com.example.androidnotifications;
+package com.tfm.androidnotifications;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
